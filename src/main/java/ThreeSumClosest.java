@@ -1,24 +1,30 @@
+import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
 class ThreeSumClosest {
     public int threeSumClosest(int[] nums, int target) {
-        Queue<Integer> min = new PriorityQueue<>();
-        Queue<Integer> max = new PriorityQueue<>();
-        int diff = 0;
-        for (int n : nums) {
-            if (n > target) {
-                max.offer(n);
-            } else {
-                min.offer(n);
+        Arrays.sort(nums);
+        int result = nums[0]+nums[1]+nums[2];
+        for (int i = 0; i < nums.length-2; i++) {
+            int a=i+1;
+            int b= nums.length-1;
+            while(a<b){
+                int sum = nums[i] + nums[a] + nums[b];
+                if(Math.abs(sum-target)<Math.abs(result-target))result=sum;
+                if(sum>target){
+                    b--;
+                }else if(sum < target){
+                    a++;
+                }else{
+                    return sum;
+                }
             }
         }
-        min.stream().forEach(System.out::println);
-
-        return 1;
+        return result;
     }
 
     public static void main(String[] args) {
-        new ThreeSumClosest().threeSumClosest(new int[]{1, 3, -1, 0}, 1);
+        new ThreeSumClosest().threeSumClosest(new int[]{-1,2,1,-4}, 1);
     }
 }
