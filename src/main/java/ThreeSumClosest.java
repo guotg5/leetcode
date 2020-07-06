@@ -1,6 +1,4 @@
 import java.util.Arrays;
-import java.util.PriorityQueue;
-import java.util.Queue;
 
 class ThreeSumClosest {
     public int threeSumClosest(int[] nums, int target) {
