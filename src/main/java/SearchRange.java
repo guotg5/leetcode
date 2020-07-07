@@ -1,48 +1,32 @@
 //34
 class SearchRange {
     public int[] searchRange(int[] nums, int target) {
-        int one = find(nums, target);
-        if(one == -1){
-            return new int[]{-1,-1};
-        }
-
-        int left = 0;
-        int right = (left + one - 1) / 2;
-
-        int left2 = (right + one + 1) / 2;
-        int right2 = nums.length;
-
-        int mid = (left + right) / 2;
-        int mid2 = (left2 + right2) / 2;
-
-        while(left < right){
-            if(nums[mid] > target){
-                right = mid - 1;
-            }else if(nums[mid] <target){
-                left = mid + 1;
-            }else{
-
-            }
-        }
-
-        return nums;
+        return new int[]{find(nums, target, true), find(nums, target, false)};
     }
 
-    public int find(int[] nums, int target){
+    public int find(int[] nums, int target, boolean isl){
         int left = 0;
         int right = nums.length;
 
-        int mid = (left + right) / 2;
+        int mid = left + (right - left) / 2;
         while(left < right){
             if(nums[mid] > target){
                 right = mid - 1;
-            }else if(nums[mid] <target){
+            }else if(nums[mid] < target){
                 left = mid + 1;
-            }else{
-                return mid;
+            }else if(nums[mid] == target){
+                if(isl){
+                    right = mid;
+                }else{
+                    left = mid +1;
+                }
             }
-            mid = (left + right) / 2;
+            mid = left + (right - left) / 2;
         }
-        return -1;
+        return isl?left:left-1;
+    }
+
+    public static void main(String[] args) {
+        new SearchRange().searchRange(new int[]{5,7,7,8,8,10},8);
     }
 }
