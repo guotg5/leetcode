@@ -1,6 +1,9 @@
 //34
 class SearchRange {
     public int[] searchRange(int[] nums, int target) {
+        if(nums.length == 0){
+            return new int[]{-1,-1};
+        }
         return new int[]{find(nums, target, true), find(nums, target, false)};
     }
 
@@ -11,7 +14,7 @@ class SearchRange {
         int mid = left + (right - left) / 2;
         while(left < right){
             if(nums[mid] > target){
-                right = mid - 1;
+                right = mid;
             }else if(nums[mid] < target){
                 left = mid + 1;
             }else if(nums[mid] == target){
@@ -23,10 +26,16 @@ class SearchRange {
             }
             mid = left + (right - left) / 2;
         }
+        if(isl&&(left>=nums.length||nums[left]!=target)){
+            return -1;
+        }else if(!isl&&(left<1||nums[left-1]!=target)){
+            return -1;
+        }
         return isl?left:left-1;
     }
 
     public static void main(String[] args) {
-        new SearchRange().searchRange(new int[]{5,7,7,8,8,10},8);
+        Object o =new SearchRange().searchRange(new int[]{5},5);
+        o.hashCode();
     }
 }
