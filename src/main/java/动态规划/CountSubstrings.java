@@ -5,6 +5,25 @@ package 动态规划;
 * */
 class CountSubstrings {
     public int countSubstrings(String s) {
+        int len = s.length();
+        int sum = 0;
+        boolean dp[][] = new boolean[len][len];
+        //初始化 单个字符 必然是回文
+        for (int i = 0; i < len; i++) {
+            dp[i][i] = true;
+        }
+        //从右下角遍历
+        for (int i = len-1; i > 0; i--) {
+            for (int j = i-1; j > -1; j--) {
+                if(i-j==1){
+                    if(s.charAt(i) == s.charAt(j)){
+                        dp[i][j] = true;
+                    }
+                }else{
 
+                }
+            }
+        }
+        return sum;
     }
 }
