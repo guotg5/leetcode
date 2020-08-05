@@ -11,19 +11,28 @@ class CountSubstrings {
         //初始化 单个字符 必然是回文
         for (int i = 0; i < len; i++) {
             dp[i][i] = true;
+            sum++;
         }
         //从右下角遍历
-        for (int i = len-1; i > 0; i--) {
-            for (int j = i-1; j > -1; j--) {
-                if(i-j==1){
-                    if(s.charAt(i) == s.charAt(j)){
-                        dp[i][j] = true;
+        for (int i = len-2; i > -1; i--) {
+            for (int j = i, x = len - 1; j > -1; j--,x--) {
+                if(x-j==1){
+                    if(s.charAt(x) == s.charAt(j)){
+                        dp[x][j] = true;
+                        sum++;
                     }
                 }else{
-
+                	if((s.charAt(x) == s.charAt(j))&&dp[x-1][j+1]) {
+                		dp[x][j] = true;
+                		sum++;
+                	}
                 }
             }
         }
         return sum;
     }
+    
+    public static void main(String[] args) {
+    	System.out.print(new CountSubstrings().countSubstrings("abaa"));
+	}
 }
