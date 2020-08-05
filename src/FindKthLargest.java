@@ -2,8 +2,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 public class FindKthLargest {
     public int findKthLargest(int[] nums, int k) {

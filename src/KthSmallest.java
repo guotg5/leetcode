@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 //378
 class KthSmallest {
 //    二分法   有序二维矩阵  如果确定一个数k 很容易得出比k小的数有多少个（从左下角遍历 直到横坐标超出）

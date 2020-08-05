@@ -1,8 +1,6 @@
 package string;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 public class BuddyStrings {
@@ -21,7 +19,6 @@ public class BuddyStrings {
             }
             return false;
         }
-        Map<Character,Integer> map = new HashMap<>();
         int x = -1;
         int y = -1;
         char[] a = A.toCharArray();
