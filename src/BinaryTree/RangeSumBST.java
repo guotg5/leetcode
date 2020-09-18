@@ -1,9 +1,9 @@
 package BinaryTree;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
-import java.util.Vector;
+import com.sun.deploy.panel.ITreeNode;
+import sun.reflect.generics.tree.Tree;
+
+import java.util.*;
 
 /** 
  * 二叉搜索树范围和
@@ -50,7 +50,7 @@ class RangeSumBST {
 	}
 	
 	/**
-	 * @Description 第k大节点
+	 * @Description 第k大节点  中序遍历
 	 *
 	 * @param root
 	 * @param k
@@ -67,7 +67,7 @@ class RangeSumBST {
 				list.add(root.val);
 				if(v.size()>0) {
 					root = v.pop();
-					list.add(root.val);
+					//list.add(root.val);
 					while(root.right == null && v.size()>0) {
 						root = v.pop();
 						list.add(root.val);
@@ -82,6 +82,74 @@ class RangeSumBST {
 			}
 		}
 		
-		return list.get(k-1);
+		return list.get(list.size()-k);
     }
+
+	/**
+	 * 第k大 使用后序遍历
+	 *
+	 * @param root
+	 * @param k
+	 * @return
+	 */
+	public int kthLargest1(TreeNode root, int k) {
+		Stack<TreeNode> v = new Stack<>();
+		List<Integer> list = new ArrayList<>();
+		while(root != null) {
+			v.push(root);
+			if(root.right!=null) {
+				root = root.right;
+			}else {
+				list.add(root.val);
+				if(v.size()>0) {
+					root = v.pop();
+					//list.add(root.val);
+					while(root.left == null && v.size()>0) {
+						root = v.pop();
+						list.add(root.val);
+					}
+					if(root.left!=null) {
+						root = root.left;
+					}else {
+						root = null;
+					}
+				}
+			}
+		}
+
+		return list.get(list.size()-k);
+	}
+
+	/**
+	 * 构造平衡二叉搜索树
+	 *
+	 * @param nums
+	 * @return
+	 */
+	public TreeNode sortedArrayToBST(int[] nums) {
+		if(nums == null || nums.length == 0)return null;
+
+		int mid = (nums.length-1)/2;
+		TreeNode node = new TreeNode(nums[mid]);
+		node.left = sortedArrayToBST(Arrays.copyOfRange(nums, 0, mid));
+		node.right = sortedArrayToBST(Arrays.copyOfRange(nums, mid+1, nums.length));
+
+		return node;
+	}
+
+	TreeNode result = new TreeNode(0);
+	TreeNode result1 = result;
+	public TreeNode increasingBST(TreeNode root) {
+		if(root != null){
+			increasingBST(root.left);
+			result.right = new TreeNode(root.val);
+			result = result.right;
+			increasingBST(root.right);
+		}
+		return result1.right;
+	}
+
+	public static void main(String[] args) {
+		new RangeSumBST().increasingBST(TreeNode.convert(new int[]{5,3,6,2,4,0,8,1,0,0,0,7,9}));
+	}
 }

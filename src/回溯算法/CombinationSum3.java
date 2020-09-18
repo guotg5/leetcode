@@ -2,6 +2,7 @@ package 回溯算法;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /** 
  * 找出所有相加之和为 n 的 k 个数的组合。组合中只允许含有 1 - 9 的正整数，并且每种组合中不存在重复的数字。
@@ -20,7 +21,7 @@ class CombinationSum3 {
 
     }
     
-    void dfs(int target, int count, int begin, Set) {
+    void dfs(int target, int count, int begin, Set s) {
     	count--;
     	for (int i = begin; i < 10; i++) {
     		if(count == 0) {
@@ -28,9 +29,9 @@ class CombinationSum3 {
     				
     			}
     		}
-			if(target = i && count == 0) {
-				
-			}
+//			if(target = i && count == 0) {
+//
+//			}
 		}
     }
 }
