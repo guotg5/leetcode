@@ -221,6 +221,78 @@ class BinaryTree {
 		return list;
 	}
 
+	/**
+	 * 二叉树先序遍历-非递归
+	 *
+	 * @param root
+	 * @return
+	 */
+	public List<Integer> preorder(TreeNode root){
+		Stack<TreeNode> stack = new Stack<>();
+		List<Integer> list = new ArrayList<>();
+		while(root != null || stack.size() > 0){
+			if(root != null){
+				list.add(root.val);
+				stack.push(root);
+				root = root.left;
+			}else{
+				root = stack.pop().right;
+			}
+		}
+		return list;
+	}
+
+	/**
+	 * 二叉树中序遍历-非递归
+	 *
+	 * @param root
+	 * @return
+	 */
+	public List<Integer> inorder(TreeNode root){
+		Stack<TreeNode> stack = new Stack<>();
+		List<Integer> list = new ArrayList<>();
+		while(root != null || stack.size() > 0){
+			if(root != null){
+				stack.push(root);
+				root = root.left;
+			}else{
+				list.add(stack.peek().val);
+				root = stack.pop().right;
+			}
+		}
+		return list;
+	}
+
+	/**
+	 * 二叉树后序遍历-非递归
+	 * 双栈法
+	 * @param root
+	 * @return
+	 */
+	public List<Integer> postorder(TreeNode root){
+		Stack<TreeNode> stack = new Stack<>();
+		Stack<TreeNode> stack1 = new Stack<>();
+		List<Integer> list = new ArrayList<>();
+		if(root != null){
+			stack.push(root);
+			while(!stack.isEmpty()){
+				root = stack.pop();
+				stack1.push(root);
+				if(root.left != null){
+					stack.push(root.left);
+				}
+				if(root.right != null){
+					stack.push(root.right);
+				}
+			}
+			while (!stack1.isEmpty()){
+				list.add(stack1.pop().val);
+			}
+		}
+		return list;
+	}
+
+
 	public static void main(String[] args) {
 		new BinaryTree().lowestCommonAncestor(TreeNode.convert(new int[]{6,2,8,0,4,7,9,0,0,3,5}),new TreeNode(2),new TreeNode(4));
 	}
