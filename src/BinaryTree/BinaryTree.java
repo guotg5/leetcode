@@ -292,8 +292,133 @@ class BinaryTree {
 		return list;
 	}
 
+	/**
+	 * 路径和
+	 * @param root
+	 * @param sum
+	 * @return
+	 */
+	public boolean hasPathSum(TreeNode root, int sum) {
+		if(root == null) return false;
+		if(root.val == sum && root.left==null && root.right==null) return true;
+		if(hasPathSum(root.left, sum-root.val)){
+			return true;
+		}
+		if(hasPathSum(root.right, sum-root.val)){
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * 从根到叶的二进制数之和
+	 * @param root
+	 * @return
+	 */
+	public int sumRootToLeaf(TreeNode root) {
+		return sumRootToLeaf(root, 0);
+	}
+
+	int sumRootToLeaf(TreeNode root, int num){
+		int sum = 0;
+		if(root != null){
+			num = num*2 + root.val;
+			if(root.left != null)sum+=sumRootToLeaf(root.left, num);
+			if(root.right != null)sum+=sumRootToLeaf(root.right, num);
+			if(root.left == null && root.right == null)sum+=num;
+		}
+		return sum;
+	}
+
+	/**
+	 *  对称的二叉树
+	 *
+	 * @param root
+	 * @return
+	 */
+	public boolean isSymmetric(TreeNode root) {
+		LinkedList<TreeNode> queue = new LinkedList<>();
+		if(root!=null)queue.offer(root);
+		int count = queue.size();
+		while(queue.size()>0){
+			LinkedList<Integer> deque = new LinkedList<>();
+			//将一行数据val放入双端队列中
+			for (int i = 0; i < count; i++) {
+				TreeNode node = queue.poll();
+				if(node == null){
+					deque.offer(null);
+				}else{
+					deque.offer(node.val);
+					queue.offer(node.left);
+					queue.offer(node.right);
+				}
+			}
+			count = queue.size();
+			while(deque.size()>1){
+				if(deque.poll()!=deque.pollLast()){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	public boolean isSymmetric_digui(TreeNode root) {
+
+		return digui(root.left, root.right);
+	}
+
+	boolean digui(TreeNode p, TreeNode q){
+		if(p == null && q == null)return true;
+		if(p == null || q == null)return false;
+		if(p.val != q.val)return false;
+		return digui(p.left,q.right)?digui(p.right,q.left):false;
+	}
+
+	public TreeNode buildTree(int[] preorder, int[] inorder) {
+		if(preorder==null||preorder.length==0)return null;
+		int i = 0;
+		int rootindex = -1;
+		while(rootindex == -1){
+			rootindex = findIndex(inorder, preorder[i++]);
+		}
+		TreeNode rootNode = new TreeNode(inorder[rootindex]);
+		if(preorder.length>1){
+			if(rootindex!=0) {
+			    preorder = Arrays.copyOfRange(preorder,1, preorder.length);
+                rootNode.left = buildTree(preorder ,Arrays.copyOfRange(inorder,0,rootindex));
+            }
+			if(rootindex+1<inorder.length)
+				rootNode.right = buildTree(Arrays.copyOfRange(preorder,1, preorder.length),
+                        Arrays.copyOfRange(inorder, rootindex+1, inorder.length));
+		}
+		return rootNode;
+	}
+
+	int findIndex(int[] arr, int value){
+		for (int i = 0; i < arr.length; i++) {
+			if(arr[i] == value){
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	/**
+	 * 100. 相同的树
+	 *
+	 * @param p
+	 * @param q
+	 * @return
+	 */
+	public boolean isSameTree(TreeNode p, TreeNode q) {
+		if(p == null && q == null)return true;
+		if(p == null || q == null)return false;
+		if(p.val != q.val)return false;
+		return isSameTree(p.left, q.left)?isSameTree(p.right, q.right):false;
+	}
 
 	public static void main(String[] args) {
-		new BinaryTree().lowestCommonAncestor(TreeNode.convert(new int[]{6,2,8,0,4,7,9,0,0,3,5}),new TreeNode(2),new TreeNode(4));
+		new BinaryTree().buildTree(new int[]{3,9,20,15,7}, new int[]{9,3,15,20,7});
 	}
 }

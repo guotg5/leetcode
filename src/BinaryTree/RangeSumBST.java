@@ -6,15 +6,17 @@ import sun.reflect.generics.tree.Tree;
 import java.util.*;
 
 /** 
- * 二叉搜索树范围和
- * 
- * @ClassName RangeSumBST 
- * @Description 给定二叉搜索树的根结点 root，返回 L 和 R（含）之间的所有结点的值的和。
- * @author guotg
- * @date 2020-9-16 17:36:39 
- *  
+ * 二叉搜索树
  */
-class RangeSumBST {
+class BST {
+
+	/**
+	 * 二叉搜索树范围和
+	 * @param root
+	 * @param L
+	 * @param R
+	 * @return
+	 */
 	public int rangeSumBST(TreeNode root, int L, int R) {
 		if(root == null)return 0;
 		int val = root.val;
@@ -149,7 +151,32 @@ class RangeSumBST {
 		return result1.right;
 	}
 
+	/**
+	 * 给定一个二叉搜索树, 找到该树中两个指定节点的最近公共祖先。
+	 * 遍历找到节点既大于等于p 又小于等于q即可
+	 * @param root
+	 * @param p
+	 * @param q
+	 * @return
+	 */
+	public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+		if(p.val>q.val){
+			TreeNode temp = p;
+			p = q;
+			q = temp;
+		}
+		if(root != null){
+			if(root.val>=p.val&&root.val<=q.val){
+				return root;
+			}else{
+				TreeNode left = lowestCommonAncestor(root.left,p,q);
+				return left!=null?left:lowestCommonAncestor(root.right,p,q);
+			}
+		}
+		return null;
+	}
+
 	public static void main(String[] args) {
-		new RangeSumBST().increasingBST(TreeNode.convert(new int[]{5,3,6,2,4,0,8,1,0,0,0,7,9}));
+		new BST().increasingBST(TreeNode.convert(new int[]{5,3,6,2,4,0,8,1,0,0,0,7,9}));
 	}
 }

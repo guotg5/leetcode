@@ -1,4 +1,4 @@
-package string;
+package String;
 
 class RepeatedStringMatch {
     public int repeatedStringMatch(String A, String B) {
