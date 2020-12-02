@@ -176,6 +176,28 @@ class BST {
 		return null;
 	}
 
+	public TreeNode convertBiNode(TreeNode root) {
+		Stack<TreeNode> stack = new Stack<>();
+		Queue<TreeNode> que = new ArrayDeque<>();
+		TreeNode result = new TreeNode(1);
+		TreeNode node = result;
+		stack.push(root);
+		while (!stack.isEmpty()){
+			if(root != null){
+				root = root.left;
+			}else{
+				root = stack.pop();
+				result.right = root;
+
+			}
+		}
+		result = que.poll();
+		while (!que.isEmpty()){
+
+		}
+		return result;
+	}
+
 	public static void main(String[] args) {
 		new BST().increasingBST(TreeNode.convert(new int[]{5,3,6,2,4,0,8,1,0,0,0,7,9}));
 	}

@@ -1,6 +1,6 @@
 package String;
 
-public class AllString {
+public class Strings {
 
     public boolean isLongPressedName(String name, String typed) {
         char pre = ' ';

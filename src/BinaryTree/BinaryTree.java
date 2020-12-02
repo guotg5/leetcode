@@ -418,6 +418,41 @@ class BinaryTree {
 		return isSameTree(p.left, q.left)?isSameTree(p.right, q.right):false;
 	}
 
+	/**
+	 * @param root
+	 * @return
+	 */
+	public int sumNumbers(TreeNode root) {
+		if(root==null)return 0;
+		int sum = 0;
+		Queue<Integer> stack = new ArrayDeque<>();
+		Queue<TreeNode> nodes = new ArrayDeque<>();
+
+		nodes.offer(root);
+		stack.offer(root.val);
+		while (!nodes.isEmpty()){
+			int len = nodes.size();
+			for (int i = 0; i < len; i++) {
+				TreeNode node = nodes.poll();
+				Integer val = stack.poll();
+				if(node.left==null&&node.right==null){
+					sum+=val;
+				}else{
+					if (node.left!=null){
+						nodes.offer(node.left);
+						stack.offer(val*10+node.left.val);
+					}
+					if (node.right!=null){
+						nodes.offer(node.right);
+						stack.offer(val*10+node.right.val);
+					}
+				}
+			}
+		}
+
+		return sum;
+	}
+
 	public static void main(String[] args) {
 		new BinaryTree().buildTree(new int[]{3,9,20,15,7}, new int[]{9,3,15,20,7});
 	}
