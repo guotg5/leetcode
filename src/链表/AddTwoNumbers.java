@@ -11,7 +11,7 @@ import java.util.Deque;
  * @author guotg
  * @date 2020-9-10 18:50:00 
  */
-class AddTwoNumbers {
+public class AddTwoNumbers {
 	
 	public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 		ListNode result = new ListNode(0);
@@ -88,9 +88,11 @@ class AddTwoNumbers {
 	}
 
 	public static class ListNode {
-		int val;
-		ListNode next;
-		ListNode(int x) { val = x; }
+		public int val;
+		public ListNode next;
+		public ListNode(int x) { val = x; }
+		public ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+
 
 		public static ListNode convert(int[] arr){
 			ListNode node = new ListNode(arr[0]);
@@ -100,6 +102,10 @@ class AddTwoNumbers {
 				node = node.next;
 			}
 			return result;
+		}
+
+		public String toString() {
+		    return String.valueOf(val);
 		}
 	}
 }
