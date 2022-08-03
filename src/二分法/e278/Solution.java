@@ -17,4 +17,8 @@ public class Solution extends VersionControl {
         }
         return result;
     }
+
+    private boolean isBadVersion(int mid) {
+        return false;
+    }
 }
