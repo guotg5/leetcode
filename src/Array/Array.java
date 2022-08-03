@@ -1,10 +1,27 @@
 package Array;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.*;
 
 public class Array {
+
+    //在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。
+    //2 <= n <= 100000
+    //1.用set判重
+    //2.数组下标和值存在一对多关系 遍历将其移动到对应下标 如果和下标处相等 则重复
+    public int findRepeatNumber(int[] nums) {
+        int i = 0;
+        while(i < nums.length) {
+            if(nums[i] == i) {
+                i++;
+                continue;
+            }
+            if(nums[nums[i]] == nums[i]) return nums[i];
+            int tmp = nums[i];
+            nums[i] = nums[tmp];
+            nums[tmp] = tmp;
+        }
+        return -1;
+    }
 
     /**
      * 直接计算相邻的白格即可
