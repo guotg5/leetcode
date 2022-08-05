@@ -1,4 +1,4 @@
-package 二分法;
+package bisectionMethod;
 
 /**
  * 寻找两个正序数组的中位数

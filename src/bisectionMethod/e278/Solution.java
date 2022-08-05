@@ -1,4 +1,4 @@
-package 二分法.e278;
+package bisectionMethod.e278;
 
 public class Solution extends VersionControl {
     public int firstBadVersion(int n) {

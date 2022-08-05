@@ -1,6 +1,6 @@
-package 链表.m19;
+package linkedList.m19;
 
-import 链表.AddTwoNumbers.ListNode;
+import linkedList.AddTwoNumbers.ListNode;
 
 class Solution {
     //1 2 3 4 5

@@ -1,4 +1,4 @@
-package 二分法.e35;
+package bisectionMethod.e35;
 
 class Solution {
     public int searchInsert(int[] nums, int target) {

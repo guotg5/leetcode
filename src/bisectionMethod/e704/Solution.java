@@ -1,4 +1,4 @@
-package 二分法.e704;
+package bisectionMethod.e704;
 
 class Solution {
     public int search(int[] nums, int target) {

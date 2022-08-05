@@ -1,4 +1,4 @@
-package 二分法.e278;
+package bisectionMethod.e278;
 
 /**
  *

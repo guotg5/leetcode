@@ -1,4 +1,4 @@
-package 链表;
+package linkedList;
 
 /**
  * 环形链表相关
