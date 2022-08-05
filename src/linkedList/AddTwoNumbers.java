@@ -1,7 +1,9 @@
 package linkedList;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
+import java.util.List;
 
 /**
  * 给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。
@@ -72,6 +74,21 @@ public class AddTwoNumbers {
 			fast = fast.next.next;
 		}
 		return slow;
+	}
+
+	/**
+	 * 输入一个链表的头节点，从尾到头反过来返回每个节点的值（用数组返回）
+	 **/
+	public int[] reversePrint(ListNode head) {
+		List<Integer> result = new ArrayList<>();
+		reversePrint(head, result);
+		return result.stream().mapToInt(Integer::valueOf).toArray();
+	}
+
+	private void reversePrint(ListNode head, List<Integer> result) {
+		if(head == null) return;
+		reversePrint(head.next, result);
+		result.add(head.val);
 	}
 
 	public static void main(String[] args) {
