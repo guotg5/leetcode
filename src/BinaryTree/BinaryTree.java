@@ -375,6 +375,13 @@ class BinaryTree {
 		return digui(p.left,q.right)?digui(p.right,q.left):false;
 	}
 
+	/**
+	 * 输入某二叉树的前序遍历和中序遍历的结果，请构建该二叉树并返回其根节点。
+	 * 假设输入的前序遍历和中序遍历的结果中都不含重复的数字。
+	 * 示例 1:
+	 * Input: preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]
+	 * Output: [3,9,20,null,null,15,7]
+	 **/
 	public TreeNode buildTree(int[] preorder, int[] inorder) {
 		if(preorder==null||preorder.length==0)return null;
 		int i = 0;
