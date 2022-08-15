@@ -61,12 +61,21 @@ class Reverse {
         return result;
     }
 
-    public static void main(String[] args) {
-        fibonacci(45);
-        System.out.println();
-        for (int i = 2; i <= 45; i++) {
-            System.out.print(fibonacciDG(i)+ " ");
+    public static double power(double a, int b) {
+        //判断是否偶数
+        if(b == 0) return 1;
+        if(b == 1) return a;
+        double result = power(a, b >> 1);
+        result *= result;
+        if((b&0b1) == 1) {
+            result *= a;
         }
+        return result;
     }
+
+    public static void main(String[] args) {
+        System.out.print(power(2, 4));
+    }
+
 
 }

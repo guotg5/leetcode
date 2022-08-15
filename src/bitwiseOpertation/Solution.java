@@ -8,5 +8,16 @@ package bitwiseOpertation;
  */
 public class Solution {
 
+    public static int numberOf1(int num) {
+        int count = 0;
+        while(num > 0) {
+            count++;
+            num = num & (num-1);// 1100 & 1011 = 1000 正好去掉最后的1
+        }
+        return count;
+    }
 
+    public static void main(String[] args) {
+        System.out.println(numberOf1(5));
+    }
 }
