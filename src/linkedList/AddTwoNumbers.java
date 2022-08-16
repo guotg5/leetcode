@@ -93,20 +93,21 @@ public class AddTwoNumbers {
 		node.next = node.next.next;
 	}
 
-	public void deleteDuplication(ListNode head) {
-		if(head == null || head.next == null)return;
+	public ListNode deleteDuplication(ListNode head) {
+		if(head == null || head.next == null)return head;
 		Set<Integer> set = new HashSet<>();
 		ListNode node = head;
-		head = node.next;
-		while(head != null) {
-			if(set.contains(head.val)) {
+		set.add(node.val);
+		while(node.next != null) {
+			ListNode curr = node.next;
+			if(set.contains(curr.val)) {
 				node.next = node.next.next;
 			}else {
-				node = node.next;
-				set.add(head.val);
+				set.add(curr.val);
 			}
-			head = node.next;
+			node = node.next;
 		}
+		return head;
 	}
 
 	public static void main(String[] args) {
