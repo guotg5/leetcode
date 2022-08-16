@@ -73,8 +73,40 @@ class Reverse {
         return result;
     }
 
+    /**
+     * n = 9 则打印到999
+     **/
+    public static void printNumber(int n) {
+        printNumberDG(new char[n], 0);
+    }
+
+    public static void printNumberDG(char[] chars, int index) {
+        if(index == chars.length) {
+            printNumber(chars);
+            return;
+        }
+        for (int i = 0; i < 10; i++) {
+            chars[index] = (char) ('0' + i);
+            printNumberDG(chars, index + 1);
+        }
+    }
+
+    public static void printNumber(char[] chars) {
+        boolean right = false;
+        for (char c : chars) {
+            if (right || c != '0') {
+                right = true;
+                System.out.print(c);
+            }
+        }
+        System.out.println();
+    }
+
+
+
     public static void main(String[] args) {
-        System.out.print(power(2, 4));
+        printNumber(2);
+//        System.out.print();
     }
 
 
