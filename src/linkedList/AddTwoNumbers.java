@@ -104,8 +104,8 @@ public class AddTwoNumbers {
 				node.next = node.next.next;
 			}else {
 				set.add(curr.val);
+				node = node.next;
 			}
-			node = node.next;
 		}
 		return head;
 	}

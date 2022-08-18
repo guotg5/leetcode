@@ -227,7 +227,29 @@ public class Array {
         return left;
     }
 
+    public static int[] reorderOddEven(int[] arr) {
+        int l = 0;
+        int r = arr.length - 1;
+
+        while(l < r) {
+            while(l < r && (arr[l] & 1) == 1) {
+                l++;
+            }
+            while(r > l && (arr[r] & 1) == 0) {
+                r--;
+            }
+            if((arr[l] & 1) == 0 && (arr[r] & 1) == 1) {
+                int temp = arr[l];
+                arr[l] = arr[r];
+                arr[r] = temp;
+            }
+        }
+
+        return arr;
+    }
+
     public static void main(String[] args) {
-        new Array().searchRange(new int[]{5,7,7,8,8,10},8);
+//        new Array().searchRange(new int[]{5,7,7,8,8,10},8);
+        reorderOddEven(new int[]{5,7,7,8,9,10});
     }
 }
