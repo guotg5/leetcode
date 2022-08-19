@@ -110,6 +110,70 @@ public class AddTwoNumbers {
 		return head;
 	}
 
+	/**
+	 * 快慢指针找从尾数第k个节点
+	 **/
+	public ListNode findKthToTail(ListNode head, int k) {
+		ListNode fast = head;
+		ListNode slow = head;
+		while(fast != null) {
+			fast = fast.next;
+			if(k == 0) {
+				slow = slow.next;
+			} else {
+				k--;
+			}
+		}
+		return k==0? slow : null;
+	}
+
+	/**
+	 * 快慢指针证明有环
+	 **/
+	public ListNode ifCycle(ListNode head) {
+		if(head == null) return null;
+		ListNode fast = head;
+		ListNode slow = head;
+
+		while(fast.next != null && fast.next.next != null) {
+			fast = fast.next.next;
+			slow = slow.next;
+			if(fast.equals(slow)) return fast;
+		}
+		return null;
+	}
+
+	/**
+	 * 找环的入口
+	 * 起点---n(入口)---a(相遇点)---b(剩余长度)
+	 * 已知 2(n+a) = n+a+x(a+b)
+	 *     n = b-a-b + x(a+b) = b + (x-1)(a+b)
+	 **/
+	public ListNode findMeetNode(ListNode head) {
+		if(head == null) return null;
+		ListNode fast = head;
+		ListNode slow = head;
+		boolean meet = false;
+
+		while(fast.next != null && fast.next.next != null) {
+			slow = slow.next;
+			if(meet){
+				fast = fast.next;
+			}else {
+				fast = fast.next.next;
+			}
+			if(slow.equals(fast)) {
+				if(meet || fast.equals(head)){
+					return fast;
+				}else {
+					meet = true;
+					slow = head;
+				}
+			}
+		}
+		return null;
+	}
+
 	public static void main(String[] args) {
 		reorderList(ListNode.convert(new int[]{1,2,3,4,5}));
 	}
