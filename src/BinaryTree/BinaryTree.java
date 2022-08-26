@@ -422,8 +422,19 @@ class BinaryTree {
 		if(p == null && q == null)return true;
 		if(p == null || q == null)return false;
 		if(p.val != q.val)return false;
-		return isSameTree(p.left, q.left)?isSameTree(p.right, q.right):false;
+		return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
 	}
+
+	/**
+	 * p是否包含q 具有相同结构
+	 **/
+	public boolean isSameStructure (TreeNode p, TreeNode q) {
+		if(q == null)return true;
+		if(p == null)return false;
+		if(p.val != q.val)return false;
+		return isSameStructure(p.left, q.left) && isSameStructure(p.right, q.right);
+	}
+
 
 	/**
 	 * @param root
@@ -460,7 +471,57 @@ class BinaryTree {
 		return sum;
 	}
 
+	/**
+	 * 二叉搜索树 转 循环双向链表
+	 **/
+	//前驱 每次赋值当前节点 则正好是左子树最后一个节点
+	//头节点	前驱为空表示这个节点是头
+//	Node pre, head;
+//
+//	public Node treeToDoublyList(Node root) {
+//		if(root == null) return null;
+//		dfs(root);
+//		//遍历完后 pre正好是最后一个节点
+//		head.left = pre;
+//		pre.right = head;
+//		return head;
+//	}
+//
+//	public void dfs(Node node) {
+//		if(node == null) return;
+//		dfs(node.left);
+//		if(pre == null) {
+//			head = node;
+//		}else {
+//			pre.right = node;
+//			node.left = pre;
+//		}
+//		pre = node;
+//		dfs(node.right);
+//	}
+
+
+
+
+//	class Node {
+//		public int val;
+//		public Node left;
+//		public Node right;
+//
+//		public Node() {}
+//
+//		public Node(int _val) {
+//			val = _val;
+//		}
+//
+//		public Node(int _val,Node _left,Node _right) {
+//			val = _val;
+//			left = _left;
+//			right = _right;
+//		}
+//	};
+
 	public static void main(String[] args) {
-		new BinaryTree().buildTree(new int[]{3,9,20,15,7}, new int[]{9,3,15,20,7});
+//		new BinaryTree().treeToDoublyList(new int[]{3,9,20,15,7}, new int[]{9,3,15,20,7});
 	}
 }

@@ -88,11 +88,6 @@ public class AddTwoNumbers {
 		result.add(head.val);
 	}
 
-	public void deleteNode(ListNode node) {
-		node.val = node.next.val;
-		node.next = node.next.next;
-	}
-
 	public ListNode deleteDuplication(ListNode head) {
 		if(head == null || head.next == null)return head;
 		Set<Integer> set = new HashSet<>();
@@ -215,6 +210,22 @@ public class AddTwoNumbers {
 		return resultHead.next;
 	}
 
+	public ListNode deleteNode(ListNode head, int val) {
+		ListNode node = new ListNode(0);
+		ListNode result = node;
+		node.next = head;
+		while(node.next != null) {
+			if(node.next.val == val) {
+				node.next = node.next.next;
+				break;
+			}
+			node = node.next;
+		}
+		return result.next;
+	}
+
+
+
 	public static class ListNode {
 		public int val;
 		public ListNode next;
@@ -234,6 +245,18 @@ public class AddTwoNumbers {
 
 		public String toString() {
 		    return String.valueOf(val);
+		}
+	}
+
+	public static class Node {
+		int val;
+		Node next;
+		Node random;
+
+		public Node(int val) {
+			this.val = val;
+			this.next = null;
+			this.random = null;
 		}
 	}
 }
