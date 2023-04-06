@@ -248,8 +248,72 @@ public class Array {
         return arr;
     }
 
+    /**
+     * [[1, 2, 3, 4]
+     * ,[5, 6, 7, 8]
+     * ,[9,10,11,12]]
+     *
+     **/
+    public static void spiralOrder(int[][] matrix) {
+        if(matrix.length == 0) return;
+        int i = 0;
+        while(matrix[0].length - i > i) {
+            //绕一圈打印
+            int m = i;
+            int n = i;
+            while(n < matrix[m].length - i) {
+                System.out.println(matrix[m][n++]);
+            }
+            n--;
+            if(m + 1 >= matrix.length - i) {
+                i++;
+                continue;
+            }
+            while(++m < matrix.length - i) {
+                System.out.println(matrix[m][n]);
+            }
+            m--;
+            if(n - 1 <= i) {
+                i++;
+                continue;
+            }
+            while(--n >= i) {
+                System.out.println(matrix[m][n]);
+            }
+            n++;
+            while(--m > i) {
+                System.out.println(matrix[m][n]);
+            }
+            i++;
+        }
+    }
+
+    //给你一个正整数数组 arr（可能存在重复的元素），请你返回可在 一次交换（交换两数字 arr[i] 和 arr[j] 的位置）后得到的、按字典序排列小于 arr 的最大排列。
+    //
+    //如果无法这么操作，就请返回原数组
+    //
+
     public static void main(String[] args) {
 //        new Array().searchRange(new int[]{5,7,7,8,8,10},8);
-        reorderOddEven(new int[]{5,7,7,8,9,10});
+        spiralOrder(new int[][]{{1,2,3,4},{5,6,7,8},{9,10,11,12}});
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

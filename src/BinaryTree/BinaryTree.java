@@ -520,6 +520,26 @@ class BinaryTree {
 //			right = _right;
 //		}
 //	};
+	/**
+	 * 镜像树
+	 * 所有节点都要交换位置 递归即可
+	 **/
+	public static TreeNode mirrorTree(TreeNode root) {
+		if(root != null){
+			TreeNode left = root.left;
+			root.left = mirrorTree(root.right);
+			root.right = mirrorTree(left);
+		}
+		return root;
+	}
+
+	public static boolean isMirrorTree(TreeNode t1, TreeNode t2) {
+		if(t1 == null && t2 == null) return true;
+		if(t1 == null || t2 == null) return false;
+		if(t1.val != t2.val) return false;
+
+		return isMirrorTree(t1.left, t2.right) && isMirrorTree(t1.right, t2.left);
+	}
 
 	public static void main(String[] args) {
 //		new BinaryTree().treeToDoublyList(new int[]{3,9,20,15,7}, new int[]{9,3,15,20,7});
