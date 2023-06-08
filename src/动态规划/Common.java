@@ -1,5 +1,8 @@
 package 动态规划;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 动态规划
  *什么是动态规划算法呢？
@@ -96,23 +99,27 @@ public class Common {
      * dp[][] 走到当前位置最小和
      * f i j = curr + min(f i-1 j , f i j-1)
      **/
-    public int minPathSum(int[][] paths) {
-        int[][] sum = new int[paths.length][paths[0].length];
+    public static int minPathSum(int[][] grid) {
+        int[][] sum = new int[grid.length][grid[0].length];
 
-        for (int i = 0; i < paths.length; i++) {
-            for (int j = 0; j < paths[i].length; j++) {
-                int top = 0;
-                int left = 0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                int top = Integer.MAX_VALUE;
+                int left = Integer.MAX_VALUE;
                 if(i != 0) {
                     top = sum[i-1][j];
                 }
                 if(j != 0) {
                     left = sum[i][j-1];
                 }
-                sum[i][j] = Math.min(top, left) + paths[i][j];
+                if(i == 0 && j== 0) {
+                    sum[i][j] = grid[i][j];
+                }else {
+                    sum[i][j] = Math.min(top, left) + grid[i][j];
+                }
             }
         }
-        return sum[paths.length-1][paths[0].length-1];
+        return sum[grid.length-1][grid[0].length-1];
     }
 
     /**
@@ -181,8 +188,35 @@ public class Common {
         return result;
     }
 
+    /**
+     * 输出所有有效括号对数
+     * 输入：n = 3
+     * 输出：["((()))","(()())","(())()","()(())","()()()"]
+     * 输入：n = 2
+     * 输出：["(())","()()"]
+     * dfs
+     **/
+    public static List<String> generateParenthesis(int n) {
+        List<String> result = new ArrayList<>();
+        dfs(result,  2*n-1, "(", 1, 0);
+        return result;
+    }
+
+    public static void dfs(List<String> result, int n, String str, int left, int right) {
+        if(n == 0) {
+            result.add(str);
+            return;
+        }
+        if(left <= right || left - right < n ) {
+            dfs(result, n-1, str+"(", left+1, right);
+        }
+        if(right < left) {
+            dfs(result, n-1, str+")", left, right+1);
+        }
+    }
+
     public static void main(String[] args) {
-        System.out.println(longestPalindrome("cbcc"));
+        System.out.println(generateParenthesis(3));
     }
 
 }

@@ -28,6 +28,28 @@ public class sort {
     }
 
     /**
+     * 插入排序
+     * 依次遍历 将元素按顺序插入到已排序序列的正确位置
+     **/
+    public void insertionSort(int[] a, int n) {
+        if (n <= 1) return;
+
+        for (int i = 1; i < n; ++i) {
+            int value = a[i];
+            int j = i - 1;
+            // 查找插入的位置
+            for (; j >= 0; --j) {
+                if (a[j] > value) {
+                    a[j+1] = a[j];  // 数据移动
+                } else {
+                    break;
+                }
+            }
+            a[j+1] = value; // 插入数据
+        }
+    }
+
+    /**
      * 快排 以基准点 将小于的放一边 并递归缩小范围
      * @return int
      **/
@@ -58,7 +80,77 @@ public class sort {
         return arr;
     }
 
+    public static int[] quickSort2(int[] arr, int begin, int end) {
+        if(begin >= end) return arr;
+        int temp = arr[end];
+        int left = begin;
+        int right = end;
+        while(left < right) {
+            while(arr[left]<=temp && left < right) {
+                left++;
+            }
+            while(arr[right] >= temp && right > left) {
+                right--;
+            }
+            if(left < right){
+                int t = arr[left];
+                arr[left] = arr[right];
+                arr[right] = t;
+                left++;
+                right--;
+            }
+
+        }
+        arr[end] = arr[left];
+        arr[left] = temp;
+
+        quickSort2(arr, begin, left-1);
+        quickSort2(arr, left+1, end);
+        return arr;
+    }
+
+    /**
+     * 将数组拆分到最小子数组  从下至上 排序
+     * @param arr
+     * @Date 2023/4/6 21:47
+     * @return int
+     **/
+    public int[] mergeSort(int[] arr) {
+        if(arr.length == 1) return arr;
+
+        //拆
+        int mid = (arr.length-1)/2;
+        int[] arr1 = mergeSort(Arrays.copyOfRange(arr, 0, mid+1));
+        int[] arr2 = mergeSort(Arrays.copyOfRange(arr, mid+1, arr.length));
+
+        return mergeArr(arr1, arr2);
+    }
+
+    /**
+     * 合并两个排序数组
+     **/
+    public int[] mergeArr(int[] a, int[] b) {
+        int[] result = new int[a.length + b.length];
+        int ia = 0;
+        int ib = 0;
+        int i = 0;
+        while(ia < a.length || ib < b.length) {
+            if(ia == a.length) {
+                result[i++] = b[ib++];
+            }else if(ib == b.length) {
+                result[i++] = a[ia++];
+            }else {
+                if(a[ia] < b[ib]) {
+                    result[i++] = a[ia++];
+                }else {
+                    result[i++] = b[ib++];
+                }
+            }
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
-        System.out.println(100_000);
+        System.out.println(quickSort2(new int[]{5,78,2,4,6,2,45,4,3}, 0 , 8));
     }
 }
